@@ -1,0 +1,23 @@
+{
+  "name": "webpack_learning",
+  "version": "1.0.0",
+  "description": "webpack学习-MrSMonkey",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://MrSMonkey:li19921219CL@github.com/MrSMonkey/webpack_learning.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrSMonkey/webpack_learning/issues"
+  },
+  "homepage": "https://github.com/MrSMonkey/webpack_learning#readme",
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}
