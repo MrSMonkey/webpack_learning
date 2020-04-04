@@ -6,7 +6,14 @@ module.exports = {
   module: {
     rules: [{
       test: /\.jpg$/,
-      use: { loader: 'file-loader' }, // 
+      use: {
+        loader: 'url-loader', 
+        options: {
+          name: '[name]_[hash].[ext]', // 输出文件名称配置
+          outputPath: './images', // 输出路径配置
+          limit: 102400
+        }
+      },
     }],
   },
   output: {
