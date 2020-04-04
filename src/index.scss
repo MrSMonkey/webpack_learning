@@ -1,0 +1,9 @@
+@import './photo.scss';
+
+body {
+  .photo{
+    width: 100px;
+    height: 100px;
+    transform: translate(10px, 100px);
+  }
+}
