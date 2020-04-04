@@ -1,14 +1,5 @@
-import photo from './img1.jpg';
-import createPhoto from './createPhoto';
-import styles from './index.scss';
-
-createPhoto();
-
-
-var img = new Image();
-img.src = photo;
-img.classList.add(styles.photo);
+import './index.scss';
 
 var root = document.getElementById('root');
-root.append(img);
+root.innerHTML = '<div class="iconfont">&#xe604;</div>';
 
