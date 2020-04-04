@@ -1,8 +1,7 @@
+import photo from './img1.jpg';
 
-import Header from './header.js';
-import Content from './content.js';
-import Sidebar from '../sidebar.js';
+var img = new Image();
+img.src = photo;
 
-new Header();
-new Content();
-new Sidebar();
+var root = document.getElementById('root');
+root.append(img);
