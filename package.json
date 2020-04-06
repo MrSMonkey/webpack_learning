@@ -18,8 +18,10 @@
   "homepage": "https://github.com/MrSMonkey/webpack_learning#readme",
   "devDependencies": {
     "autoprefixer": "^9.7.5",
+    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.2",
     "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.0.4",
     "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^8.0.2",
