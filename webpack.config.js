@@ -48,6 +48,14 @@ module.exports = {
       },
     ],
   },
+  devServer: { // 实现后端调试
+    port: 8081, // 自定义本地符占用的端口
+    contentBase: './dist', // 本地服务器启动项目时，访问的目录。
+    open: true, // 是否自动打开浏览器
+    proxy: {
+      'api/': 'http://localhost:3000' // 异步数据请求代理转发地址
+    }
+  },
   plugins:[
     new HtmlWebpackPlugin({
       template: 'src/index.html',
@@ -55,6 +63,7 @@ module.exports = {
     new CleanWebpackPlugin(),
   ],
   output: {
+    publicPath: '/',
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   }

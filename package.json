@@ -4,7 +4,9 @@
   "description": "webpack学习-MrSMonkey",
   "main": "index.js",
   "scripts": {
-    "bundle": "webpack"
+    "bundle": "webpack",
+    "start": "webpack-dev-server",
+    "server": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -28,12 +30,17 @@
     "style-loader": "^1.1.3",
     "url-loader": "^4.0.0",
     "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.10.3"
   },
   "browserslist": [
     "last 2 versions",
     "> 1%",
     "iOS 7",
     "last 3 iOS versions"
-  ]
+  ],
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
