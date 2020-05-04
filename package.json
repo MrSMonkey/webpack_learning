@@ -4,9 +4,7 @@
   "description": "webpack学习-MrSMonkey",
   "main": "index.js",
   "scripts": {
-    "bundle": "webpack",
-    "start": "webpack-dev-server",
-    "server": "node server.js"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
