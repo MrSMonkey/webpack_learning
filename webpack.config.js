@@ -102,6 +102,9 @@ module.exports = {
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
+  optimization: {
+    usedExports: true, // 引入Tree Shaking被使用的才导出
+  },
   output: {
     publicPath: '/',
     filename: '[name].js',
