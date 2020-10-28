@@ -1,3 +1,8 @@
-import { add } from './math.js';
+function getComponent() {
+  return import('lodash').then(({ default: _ }) => {
+    const element = document.createElement('div');
+    element.innerHTML = _.join(['a', 'b', 'c'], '***');
+  });
+}
 
-add(1, 5);
+getComponent().then(element => document.body.appendChild(element));

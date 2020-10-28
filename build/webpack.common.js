@@ -65,6 +65,11 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all', // 代码分割配置
+    },
+  },
   output: {
     publicPath: './',
     filename: '[name].js',
