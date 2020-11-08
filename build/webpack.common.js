@@ -67,8 +67,8 @@ module.exports = {
   ],
   optimization: {
     splitChunks: { // 代码分割配置
-      chunks: 'initial', // async-只针对异步代码做代码分割； initial-只针对t同步代码做代码分割；all-无论同步或异步代码都会做代码分割打包（chunks配置需要与cacheGroups一起配合配置）
-      minSize: 0, // 引入的某个库（如：lodash）大于20kb才会做代码分割
+      chunks: 'all', // async-只针对异步代码做代码分割； initial-只针对t同步代码做代码分割；all-无论同步或异步代码都会做代码分割打包（chunks配置需要与cacheGroups一起配合配置）
+      minSize: 30000, // 引入的某个库（如：lodash）大于20kb才会做代码分割
       // maxSize: 50000, // 当引入的某个库打包后大于50kb，会尝试进行二次拆分，使其小于50kb，一般设为0或者不配置
       minChunks: 1, // 当引入的某个库在项目的引入次数（即至少有一个chunk文件依赖这个库）大于等于1时，此库才会被进行代码分割
       maxAsyncRequests: 5, // 指项目打开时能同时加载的库的个数是5个js文件，故打包过程中，分割出来的库的个数已经大于5个js文件时，后面的未打包的库将不会在进行代码分割
