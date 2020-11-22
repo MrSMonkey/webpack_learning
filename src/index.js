@@ -1,3 +1,6 @@
-import './style.css';
+import  _ from 'lodash';
+import  $ from 'jquery';
 
-console.log('hello-world');
+const dom = $('<div></div>');
+dom.html(_.join(['dell', 'lee'], '----'));
+$('body').append(dom);

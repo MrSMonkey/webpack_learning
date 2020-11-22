@@ -43,7 +43,11 @@ prodConfig = {
   ],
   optimization:{
     minimizer: [new OptimizeCssAssetsWebpackPlugin({})] // css压缩插件
-  }
+  },
+  output: {
+    filename: '[name].[contenthash].js', // 入口文件输出名字
+    chunkFilename: '[name].[contenthash].js', // 被入口文件间接引用的文件的输出名字
+  },
 }
 
 module.exports = merge(commonConfig, prodConfig);

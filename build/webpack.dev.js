@@ -45,7 +45,11 @@ devConfig = {
   },
   plugins:[
     new webpack.HotModuleReplacementPlugin(),
-  ]
+  ],
+  output: {
+    filename: '[name].js', // 入口文件输出名字
+    chunkFilename: '[name].js', // 被入口文件间接引用的文件的输出名字
+  },
 }
 
 module.exports = merge(commonConfig, devConfig);
