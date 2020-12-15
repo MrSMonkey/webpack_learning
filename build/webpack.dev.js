@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+const Webpack = require('webpack');
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
 
@@ -44,7 +44,7 @@ devConfig = {
     ]
   },
   plugins:[
-    new webpack.HotModuleReplacementPlugin(),
+    new Webpack.HotModuleReplacementPlugin(),
   ],
   output: {
     filename: '[name].js', // 入口文件输出名字

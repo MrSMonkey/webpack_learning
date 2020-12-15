@@ -1,5 +1,6 @@
 
 const path = require('path');
+const Webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -41,6 +42,10 @@ module.exports = {
       template: 'src/index.html',
     }),
     new CleanWebpackPlugin(),
+    new Webpack.ProvidePlugin({
+      $: 'jquery',
+      _join: ['lodash', 'join'],
+    }),
   ],
   optimization: {
     // 旧版本每次到耗时manifest（包与包之间的关系）可能不一样，导致contenthash发生变化
@@ -61,7 +66,7 @@ module.exports = {
   },
   // performance: false, // 关闭性能警告
   output: {
-    publicPath: './',
+    publicPath: '/',
     path: path.resolve(__dirname, '../dist'),
   },
 }
