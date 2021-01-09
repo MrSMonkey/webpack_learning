@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
 prodConfig = {
@@ -38,6 +39,10 @@ prodConfig = {
       filename: '[name].css', // 入口文件引用的css文件输出名字
       chunkFilename: '[name].chunk.css', // 非入口文件引用的css文件输出名字
     }),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
+    })
   ],
   optimization:{
     minimizer: [new OptimizeCssAssetsWebpackPlugin({})] // css压缩插件

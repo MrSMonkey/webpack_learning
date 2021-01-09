@@ -1,6 +1,13 @@
-import  _ from 'lodash';
-import  $ from 'jquery';
+console.log('hello, world');
 
-const dom = $('<div></div>');
-dom.html(_.join(['dell', 'lee'], '---'));
-$('body').append(dom);
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+    .then(registeration => {
+      console.log('service-worker registed');
+    })
+    .catch(error => {
+      console.log('service-worker regist error')
+    })
+  })
+}
