@@ -1,6 +1,4 @@
-import  _ from 'lodash';
-import  $ from 'jquery';
+import * as math from './math';
+import * as string from './string';
 
-const dom = $('<div></div>');
-dom.html(_.join(['dell', 'lee'], '---'));
-$('body').append(dom);
+export default { math, string };
