@@ -56,3 +56,5 @@ if ('serviceWorker' in navigator) {
   })
 }
 ```
+
+## TypeScript的打包配置
