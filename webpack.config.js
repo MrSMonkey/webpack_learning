@@ -91,6 +91,13 @@ module.exports = {
     open: true, // 是否自动打开浏览器
     // hot: true, // Hot Module Replace热更新
     // hotOnly: true, // Hot Module Replace热更新失效时，webpack不做任何操作，默认时会刷新页面的
+    historyApiFallback: true, // 实现单页面应用效果的配置
+    // historyApiFallback: {
+    //   rewrites: [{
+    //     from: /abc\.html/,
+    //     to: '/index.html', // to的值可以是一个函数
+    //   }]
+    // }, // 实现单页面应用效果的配置
     proxy: {
       'api/': 'http://localhost:3000', // 异步数据请求代理转发地址
       '/react/api/': {

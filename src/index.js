@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import  ReactDom from 'react-dom';
-import  axios from 'axios';
+import  { BrowserRouter, Route } from 'react-router-dom';
+import Home from './home';
+import List from './list';
 
 class App extends Component {
-  componentDidMount() {
-    // Charles Fiddler
-    axios.get('/react/api/header.json').then((data) => {
-      console.log(data);
-    })
-  }
   render () {
     return (
-      <div>Hello world!</div>
+      <BrowserRouter>
+        <Fragment>
+          <Route path='/' exact component={Home}/>
+          <Route path='/list' component={List}/>
+        </Fragment>
+      </BrowserRouter>
     );
   }
 }
