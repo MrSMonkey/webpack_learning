@@ -92,7 +92,18 @@ module.exports = {
     // hot: true, // Hot Module Replace热更新
     // hotOnly: true, // Hot Module Replace热更新失效时，webpack不做任何操作，默认时会刷新页面的
     proxy: {
-      'api/': 'http://localhost:3000' // 异步数据请求代理转发地址
+      'api/': 'http://localhost:3000', // 异步数据请求代理转发地址
+      '/react/api/': {
+        target: 'http://www.dell-lee.com', // 异步数据请求代理转发地址
+        // secure: false, // 实现https请求的转发
+        pathRewrite: {
+          'header.json': 'demo.json' // 这里指的是'/react/api/header.json'会被重写'/react/api/demo.json'
+        }
+      },
+      chagngeOrigin: true, //（爬虫）抓取 第三方网站 数据
+      // header: {
+      //   cookie: 'fadfa'
+      // }
     }
   },
   plugins:[
