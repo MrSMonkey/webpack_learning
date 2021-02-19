@@ -14,7 +14,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: '/node_modules/',
-        loader: 'babel-loader',
+        use: ['babel-loader', 'eslint-loader'],
         // options: {
         //   presets: [ // 业务代码打包配置
         //     ['@babel/preset-env', {
@@ -88,6 +88,7 @@ module.exports = {
   devServer: { // 实现后端调试
     port: 8081, // 自定义本地符占用的端口
     contentBase: './dist', // 本地服务器启动项目时，访问的目录。
+    overlay: true, // 将eslint报错显示到浏览器当中
     open: true, // 是否自动打开浏览器
     // hot: true, // Hot Module Replace热更新
     // hotOnly: true, // Hot Module Replace热更新失效时，webpack不做任何操作，默认时会刷新页面的
