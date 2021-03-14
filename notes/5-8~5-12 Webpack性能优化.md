@@ -26,4 +26,71 @@ import Child from './child/child'; // 方式1
 import Child from './child'; // 方式2
 import Child from 'delllee'; // 方式3
 ```
-5. 使用DllPlugin提高打包速度
+5. 使用DllPlugin提高打包速度[5-10~5-11]
+目的：第三方模块只打包一次。引入第三方模块的时候,要去使用dll文件引入。
+* 第1步：新建一个webpack.dll.js,并添加如下配置
+```
+const Webpack = require('webpack');
+const path = require('path');
+
+module.exports = {
+  mode: 'production',
+  entry: {
+    vendors: ['lodash'],
+    react: ['react', 'react-dom'],
+  },
+  output: {
+    filename: '[name].dll.js',
+    path: path.resolve(__dirname, '../dll'),
+    library: '[name]', // 将打包后的文件暴露出去，变量名为vendor
+  },
+  plugins: [
+    new Webpack.DllPlugin({
+      name: '[name]',
+      path: path.resolve(__dirname, '../dll/[name].manifest.json'),
+    })
+  ]
+};
+
+```
+* 第2步：运行的打包命令[yarn run build:dll]，将第三方库打包到vendors.dll.js,并生成一个映射文件vendors.manifest.json
+* 第3步: 安装[npm i add-asset-html-webpack-plugin --save]
+* 第4步: 修改webpack.common.js中的plugins配置
+```
+...
+const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
+const Webpack = require('webpack');
+const fs = require('fs');
+const plugins = [
+  new HtmlWebpackPlugin({
+    template: 'src/index.html',
+  }),
+  new CleanWebpackPlugin(),
+];
+const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
+files.forEach((fileName) => {
+  if(/.*\.dll\.js/.test(fileName)) {
+    plugins.push(new AddAssetHtmlWebpackPlugin({
+      filepath: path.resolve(__dirname, '../dll', fileName),
+    }));
+  }
+  if(/.*\.manifest\.json/.test(fileName)) {
+    plugins.push(new Webpack.DllReferencePlugin({
+      manifest: path.resolve(__dirname, '../dll', fileName),
+    }));
+  }
+})
+
+module.exports = {
+  ...
+  plugins,
+  ...
+}
+```
+
+6. 控制包文件的大小
+7. thread-loader,parallel-webpack,happypack多进程打包
+8. 合理使用并生成sourceMap
+9. 结合stats分析打包结果
+10. 开发环境内存编译
+11. 开发环境无用插件剔除,比如css/js压缩插件.

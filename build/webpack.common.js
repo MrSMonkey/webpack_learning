@@ -1,8 +1,28 @@
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
+const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
+const Webpack = require('webpack');
+const fs = require('fs');
+const plugins = [
+  new HtmlWebpackPlugin({
+    template: 'src/index.html',
+  }),
+  new CleanWebpackPlugin(),
+];
+const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
+files.forEach((fileName) => {
+  if(/.*\.dll\.js/.test(fileName)) {
+    plugins.push(new AddAssetHtmlWebpackPlugin({
+      filepath: path.resolve(__dirname, '../dll', fileName),
+    }));
+  }
+  if(/.*\.manifest\.json/.test(fileName)) {
+    plugins.push(new Webpack.DllReferencePlugin({
+      manifest: path.resolve(__dirname, '../dll', fileName),
+    }));
+  }
+})
 module.exports = {
   entry: {
     main: './src/index.js',
@@ -43,12 +63,7 @@ module.exports = {
       }
     ],
   },
-  plugins:[
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-    }),
-    new CleanWebpackPlugin(),
-  ],
+  plugins,
   optimization: {
     usedExports: true, // 引入Tree Shaking被使用的才导出
     splitChunks: { // 代码分割配置
