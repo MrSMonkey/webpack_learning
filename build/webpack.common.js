@@ -7,10 +7,17 @@ module.exports = {
   entry: {
     main: './src/index.js',
   },
+  resolve: {
+    extensions: ['.js', '.jsx'], // 引入文件时省略文件后缀时，会优先匹配这两种格式
+    alias: {
+      delllee: path.resolve(__dirname, '../src/child'),
+    },
+    mainFiles: ['index', 'child'], // 默认优先引入文件夹下index.js，其次是child.js
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: '/node_modules/',
         loader: 'babel-loader',
       },
@@ -49,7 +56,7 @@ module.exports = {
     },
   },
   output: {
-    publicPath: './',
+    publicPath: '/',
     filename: '[name].js', // 入口文件输出名字
     chunkFilename: '[name].chunk.js', // 被入口文件间接引用的文件的输出名字
     path: path.resolve(__dirname, '../dist'),

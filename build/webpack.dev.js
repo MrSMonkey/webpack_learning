@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+const Webpack = require('webpack');
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
 
@@ -6,7 +6,7 @@ devConfig = {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',// 开发环境：cheap-module-eval-source-map; 生产环境：cheap-module-eval-source-map
   devServer: { // 实现后端调试
-    port: 8081, // 自定义本地符占用的端口
+    port: 8080, // 自定义本地符占用的端口
     contentBase: './dist', // 本地服务器启动项目时，访问的目录。
     open: true, // 是否自动打开浏览器
     // hot: true, // Hot Module Replace热更新
@@ -44,7 +44,7 @@ devConfig = {
     ]
   },
   plugins:[
-    new webpack.HotModuleReplacementPlugin(),
+    new Webpack.HotModuleReplacementPlugin(),
   ]
 }
 
