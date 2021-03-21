@@ -1,14 +1,12 @@
-## 如何编写一个Loader
-1. loader本身就是一个函数；
-2. 编写一个replaceLoader--如果编译过程中遇到一个'dell'字符串，就替换成'dellLee'
+## 如何编写一个Loader（6-1 上半节）
+1. loader本身就是一个函数。
+2. 实现一个简单的loader【6-1 上半节】
 ```
+// 步骤1. 编写一个replaceLoader--如果编译过程中遇到一个'dell'字符串，就替换成'dellLee'
 module.exports = function (source) {
   return source.replace('dell', 'dellLee');
 }
-```
-3. 引入replaceLoader
-```
-// 创建webpack.config.js
+// 步骤2. 引入replaceLoader,创建webpack.config.js
 const path = require('path');
 
 module.exports = {
@@ -31,5 +29,58 @@ module.exports = {
     filename: '[name].js'
   }
 }
+// 步骤3. 运行[npm run build]即可（6-1 上半节）
 ```
-4. 运行[npm run build]即可
+
+3. 通过webpack给loader传参【6-1 下半节】
+```
+// 修改webpack.config.js
+...
+module.exports = {
+  ....
+  module: {
+    rules: [{
+      rules: [{
+        test: /\.js/,
+        use: [
+          {
+            loader: path.resolve(__dirname, './loaders/replaceLoader.js'),
+            options: {
+              name: 'lee',
+            }
+          }
+        ]
+      }]
+    }]
+  },
+  ....
+}
+// ./loaders/replaceLoader.js
+
+module.exports = function (source) {
+  return source.replace('dell', this.query.name);
+}
+
+```
+4. 通过loader-utils插件获取参数【6-1 下半节】
+```
+// 步骤1. 安装loader-utils
+npm i loader-utils --save-dev
+// 步骤2. ./loaders/replaceLoader.js
+const loaderUtils = require('loader-utils');
+module.exports = function (source) {
+  const options = loaderUtils.getOptions(this);
+  return source.replace('dell', options.name);
+}
+```
+4. 通过loader callback【6-1 下半节】:实现编译结果和extra信息的返回
+```
+// ./loaders/replaceLoader.js
+const loaderUtils = require('loader-utils');
+module.exports = function (source) {
+  const options = loaderUtils.getOptions(this);
+  const result = source.replace('dell', options.name);
+  return this.callback(null, result);
+}
+```
+
