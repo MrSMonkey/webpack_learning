@@ -1,6 +1,7 @@
 class CopyrightWebpackPlugin {
   // compiler打包中所有的信息，配置信息等
   apply(compiler) {
+    debugger;
     compiler.hooks // hooks[钩子]：值得是webpack打包过程中的不同阶段时暴露出来的钩子，我们可以利用这些钩子做一些处理
       .compile
       // 同步钩子的同步调用方式api

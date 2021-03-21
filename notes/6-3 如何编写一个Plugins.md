@@ -55,3 +55,39 @@ module.exports = CopyrightWebpackPlugin;
 // 步骤3. 运行npm run build
 ```
 
+2. webpack打包流程调试
+```
+// 步骤1. 修改package.json
+{
+  ...
+  "scripts": {
+    "debug": "node --inspect --inspect-brk node_modules/webpack/bin/webpack.js",
+    "build": "webpack"
+  },
+  ...
+}
+// --inspect 开始调试模式
+// --inspect-brk 在webpack执行时，在第一行打一个断点2
+
+// 步骤2. 在copyright-webpack-plugin.js中添加一个断点
+class CopyrightWebpackPlugin {
+  // compiler打包中所有的信息，配置信息等
+  apply(compiler) {
+    debugger;
+    ...
+  }
+}
+....
+
+// 步骤3. 
+npm run debug
+
+//  步骤4. 打开浏览器,如下图一,点击红框中的node log
+//  步骤5. 跳过第一个断点，就会来到第二个断点【即copyright-webpack-plugin.js中的断点】,如下图二,这样就可以看见参数中的变量值
+
+```
+图一<br/>
+![图一](./images/w001.png)<br/>
+图二<br/>
+![图二](./images/w001.png)
+
