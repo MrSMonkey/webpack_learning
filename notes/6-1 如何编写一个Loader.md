@@ -132,6 +132,48 @@ module.exports = {
     }]
   },
   ....
+}
 ```
 * 编译过程中，loader的执行顺序是从下到上，从右到左
 
+6. 如何实现如下方式引用loader
+```
+// webpack.config.js
+...
+module.exports = {
+  ....
+  module: {
+    rules: [{
+      rules: [{
+        test: /\.js/,
+        use: [
+          {
+            loader: 'replaceLoader', // 如何实现如下方式引用loader
+          },
+          {
+            loader: 'replaceLoaderAsync',
+            options: {
+              name: 'lee',
+            }
+          }
+        ]
+      }]
+    }]
+  },
+  ....
+}
+
+
+// webpack.config.js
+...
+module.exports = {
+  ....
+  resolveLoader: {
+    modules: ['node_modules', './loaders']
+  },
+  ....
+}
+
+```
+
+7. loader用途：多语言替换，异常监控

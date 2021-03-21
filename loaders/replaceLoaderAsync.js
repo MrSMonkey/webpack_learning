@@ -7,5 +7,5 @@ module.exports = function (source) {
   setTimeout(() => {
     const result = source.replace('dell', options.name);
     callback(null, result);
-  }, 5000)
+  }, 1000)
 }
