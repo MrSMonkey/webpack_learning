@@ -13,6 +13,7 @@
   },
   "homepage": "https://github.com/MrSMonkey/webpack_learning#readme",
   "devDependencies": {
+    "loader-utils": "^2.0.0",
     "webpack": "^5.27.1",
     "webpack-cli": "^4.5.0"
   }

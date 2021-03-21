@@ -66,6 +66,7 @@ module.exports = function (source) {
 ```
 // 步骤1. 安装loader-utils
 npm i loader-utils --save-dev
+
 // 步骤2. ./loaders/replaceLoader.js
 const loaderUtils = require('loader-utils');
 module.exports = function (source) {
@@ -83,4 +84,54 @@ module.exports = function (source) {
   return this.callback(null, result);
 }
 ```
+5. loader中的异步处理【6-2】
+```
+// ./loaders/replaceLoader.js
+const loaderUtils = require('loader-utils');
+module.exports = function (source) {
+  const options = loaderUtils.getOptions(this);
+  const callback = this.async();
+  setTimeout(() => {
+    const result = source.replace('dell', options.name);
+    callback(null, result);
+  }, 1000)
+}
+```
+6. 同时引入多个loader--如果编译过程中遇到一个'dell'字符串，就替换成'lee',再将'lee'替换成'world'
+```
+// 步骤1. 将replaceLoader.js 重命名 replaceLoaderAsync.js
+npm i loader-utils --save-dev
+
+// 步骤2. 创建replaceLoader.jsconst loaderUtils = require('loader-utils');
+module.exports = function (source) {
+  const options = loaderUtils.getOptions(this);
+  const result = source.replace('dell', options.name);
+  return this.callback(null, result);
+}
+
+// 步骤3. 修改webpack.config.js
+...
+module.exports = {
+  ....
+  module: {
+    rules: [{
+      rules: [{
+        test: /\.js/,
+        use: [
+          {
+            loader: path.resolve(__dirname, './loaders/replaceLoader.js'),
+          },
+          {
+            loader: path.resolve(__dirname, './loaders/replaceLoader.js'),
+            options: {
+              name: 'lee',
+            }
+          }
+        ]
+      }]
+    }]
+  },
+  ....
+```
+* 编译过程中，loader的执行顺序是从下到上，从右到左
 
