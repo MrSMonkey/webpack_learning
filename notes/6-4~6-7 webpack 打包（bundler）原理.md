@@ -35,7 +35,7 @@ const moduleAnalyser = (fileName) => {
     sourceType: 'module',
   }) // 抽象语法树
   const dependencies = {}; // 保存module的依赖
-  traverse(ast, { // 遍历语法书
+  traverse(ast, { // 遍历语法树
     ImportDeclaration(module) { // 遍历过程中type: 'ImportDeclaration'的module会自动调用该函数； 注：type: 'ImportDeclaration'表示module中包含import语句
       const dirName = path.dirname(fileName);
       const newFile = './' + path.join(dirName, module.node.source.value); // 依赖文件的绝对路径
